@@ -1,6 +1,28 @@
 ## TintColor.js
 Create Tint Color for Images Using JavaScript.
 
+## Usage
+  * Constructor: TintColor(srcImage, tintColor, blendMode)
+    + srcImage: (string) url of image.
+    Example: 
+    + tintColor: (string) new color as Hex or RGB
+    Example: '#ff00ff' or 'rgb(255, 0, 255)'
+    + blendMode: (string) blending mode. 
+    Example: 'destination-atop'
+    
+    Including: 
+        source-over, source-in, source-out, source-atop, 
+        destination-over, destination-in, destination-out, destination-atop,
+        lighter, copy, xor, multiply, screen, overlay, darken, lighten, 
+        color-dodge, color-burn, hard-light, soft-light, difference, exclusion,
+        hue, saturation, color, luminosity
+  * API:
+    + setSourceImage(srcImage)
+    + setTintColor(tintColor)
+    + setBlendMode(blendMode)
+    + run()
+    + getSize()
+
 ## Example
 
 ```js
