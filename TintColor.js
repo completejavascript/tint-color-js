@@ -1,11 +1,11 @@
 /*
 Constructor: TintColor(srcImage, tintColor, blendMode)
- + srcImage: (string) url of image.
-     Example: 
- + tintColor: (string) new color as Hex or RGB
-     Example: '#ff00ff' or 'rgb(255, 0, 255)'
- + blendMode: (string) blending mode. 
-     Example: 'destination-atop'
++ srcImage: (string) url of image.
+    Example: 
++ tintColor: (string) new color as Hex or RGB
+    Example: '#ff00ff' or 'rgb(255, 0, 255)'
++ blendMode: (string) blending mode. 
+    Example: 'destination-atop'
     
 Including: 
     source-over, source-in, source-out, source-atop, 
@@ -17,21 +17,22 @@ Including:
 Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
 */
 
-var TintColor = function(srcImage, tintColor, blendMode) {
+(function(document, window){ 
+  var TintColor = function(srcImage, tintColor, blendMode) {
     this.srcImage = srcImage;
     this.tintColor = tintColor;
     this.blendMode = blendMode;
-}
-TintColor.prototype.setSourceImage = function(srcImage) {
+  }
+  TintColor.prototype.setSourceImage = function(srcImage) {
     this.srcImage = srcImage;
-}
-TintColor.prototype.setTintColor = function(tintColor) {
+  }
+  TintColor.prototype.setTintColor = function(tintColor) {
     this.tintColor = tintColor;
-}
-TintColor.prototype.setBlendMode = function(blendMode) {
+  }
+  TintColor.prototype.setBlendMode = function(blendMode) {
     this.blendMode = blendMode;
-}
-TintColor.prototype.run = function() {
+  }
+  TintColor.prototype.run = function() {
     var self = this;
     return new Promise(function(resolve, reject){
       var canvas = document.createElement('canvas');
@@ -57,8 +58,8 @@ TintColor.prototype.run = function() {
       }
       image.src = srcImg;
     });  
-}
-TintColor.prototype.getSize = function getSize() {
+  }
+  TintColor.prototype.getSize = function getSize() {
     var self = this;
     return new Promise(function(resolve, reject) {
       var image = new Image();
@@ -71,4 +72,6 @@ TintColor.prototype.getSize = function getSize() {
       }
       image.src = self.srcImage; 
     }); 
-}
+  }
+  window.TintColor = TintColor;
+})(document, window);
