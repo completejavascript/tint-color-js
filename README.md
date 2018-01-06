@@ -1,2 +1,2 @@
-# tint-color-js
+# TintColor.js
 Create Tint Color for Images Using JavaScript.
