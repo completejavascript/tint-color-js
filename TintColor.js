@@ -1,5 +1,5 @@
 /*
- Constructor: TintColor(srcImage, tintColor, blendMode)
+Constructor: TintColor(srcImage, tintColor, blendMode)
  + srcImage: (string) url of image.
      Example: 
  + tintColor: (string) new color as Hex or RGB
@@ -7,14 +7,14 @@
  + blendMode: (string) blending mode. 
      Example: 'destination-atop'
     
-	Including: 
+Including: 
     source-over, source-in, source-out, source-atop, 
-	destination-over, destination-in, destination-out, destination-atop,
-	lighter, copy, xor, multiply, screen, overlay, darken, lighten, 
-	color-dodge, color-burn, hard-light, soft-light, difference, exclusion,
-	hue, saturation, color, luminosity
+    destination-over, destination-in, destination-out, destination-atop,
+    lighter, copy, xor, multiply, screen, overlay, darken, lighten, 
+    color-dodge, color-burn, hard-light, soft-light, difference, exclusion,
+    hue, saturation, color, luminosity
 	
-	Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
 */
 
 (function(document, window){ 
