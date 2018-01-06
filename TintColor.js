@@ -17,22 +17,21 @@ Including:
 Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
 */
 
-(function(document, window){ 
-  var TintColor = function(srcImage, tintColor, blendMode) {
+var TintColor = function(srcImage, tintColor, blendMode) {
     this.srcImage = srcImage;
     this.tintColor = tintColor;
     this.blendMode = blendMode;
-  }
-  TintColor.prototype.setSourceImage = function(srcImage) {
+}
+TintColor.prototype.setSourceImage = function(srcImage) {
     this.srcImage = srcImage;
-  }
-  TintColor.prototype.setTintColor = function(tintColor) {
+}
+TintColor.prototype.setTintColor = function(tintColor) {
     this.tintColor = tintColor;
-  }
-  TintColor.prototype.setBlendMode = function(blendMode) {
+}
+TintColor.prototype.setBlendMode = function(blendMode) {
     this.blendMode = blendMode;
-  }
-  TintColor.prototype.run = function() {
+}
+TintColor.prototype.run = function() {
     var self = this;
     return new Promise(function(resolve, reject){
       var canvas = document.createElement('canvas');
@@ -58,8 +57,8 @@ Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/g
       }
       image.src = srcImg;
     });  
-  }
-  TintColor.prototype.getSize = function getSize() {
+}
+TintColor.prototype.getSize = function getSize() {
     var self = this;
     return new Promise(function(resolve, reject) {
       var image = new Image();
@@ -72,6 +71,4 @@ Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/g
       }
       image.src = self.srcImage; 
     }); 
-  }
-  window.TintColor = TintColor;
-})(document, window);
+}
