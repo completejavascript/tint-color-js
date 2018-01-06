@@ -1,7 +1,7 @@
-# TintColor.js
+## TintColor.js
 Create Tint Color for Images Using JavaScript.
 
-# Example
+## Example
 
 ```js
 const srcImg = "https://res.cloudinary.com/drcrre4xg/image/upload/c_scale,w_200/v1515227140/star-yellow_hjfybq.png";
@@ -49,6 +49,6 @@ function setImage(divElement, srcURL, width, height) {
   divElement.style.backgroundImage = "url('" + srcURL + "')";
 }
 ```
-# Preview
+## Preview
 
   * [Apply Tint Color for Images Using TintColor.js](https://codepen.io/completejavascript/pen/vpWyjG)
