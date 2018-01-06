@@ -1,4 +1,4 @@
-const srcImg = "http://cdn.impressivewebs.com/2011-11/greece004.jpg";
+const srcImg = "start-yellow.png";
 const newColor = "#ff00ff";
 const blendMode = "destination-atop";
 
