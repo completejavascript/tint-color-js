@@ -3,12 +3,9 @@ Create Tint Color for Images Using JavaScript.
 
 ## Usage
   * Constructor: TintColor(srcImage, tintColor, blendMode)
-    + srcImage: (string) url of image.
-    Example: 
-    + tintColor: (string) new color as Hex or RGB
-    Example: '#ff00ff' or 'rgb(255, 0, 255)'
-    + blendMode: (string) blending mode. 
-    Example: 'destination-atop'
+    + srcImage: (string) url of image. 
+    + tintColor: (string) new color as Hex or RGB. Example: '#ff00ff' or 'rgb(255, 0, 255)'
+    + blendMode: (string) blending mode. Example: 'destination-atop'
     
     Including: 
         source-over, source-in, source-out, source-atop, 
