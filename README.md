@@ -73,3 +73,8 @@ function setImage(divElement, srcURL, width, height) {
   * [Apply Tint Color for Images Using TintColor.js](https://codepen.io/completejavascript/pen/vpWyjG)
   * [JavaScript Tint Color](https://completejavascript.com/javascript-tint-color-thay-doi-mau-sac-buc-anh/)
   
+## Visit me
+
+  * [Complete JavaScript](https://completejavascript.com)
+  
+  
