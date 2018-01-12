@@ -68,6 +68,8 @@ function setImage(divElement, srcURL, width, height) {
   divElement.style.backgroundImage = "url('" + srcURL + "')";
 }
 ```
-## Preview
+## References
 
   * [Apply Tint Color for Images Using TintColor.js](https://codepen.io/completejavascript/pen/vpWyjG)
+  * [JavaScript Tint Color](https://completejavascript.com/javascript-tint-color-thay-doi-mau-sac-buc-anh/)
+  
