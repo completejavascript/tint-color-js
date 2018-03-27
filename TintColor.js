@@ -56,7 +56,7 @@ Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/g
       image.onerror = function(error) {
         reject(error);
       }
-      image.src = srcImg;
+      image.src = self.srcImage;
     });  
   }
   TintColor.prototype.getSize = function getSize() {
