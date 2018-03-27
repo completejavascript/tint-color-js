@@ -1,4 +1,4 @@
-const srcImg = "start-yellow.png";
+const srcImg = "star-yellow.png";
 const newColor = "#ff00ff";
 const blendMode = "destination-atop";
 
