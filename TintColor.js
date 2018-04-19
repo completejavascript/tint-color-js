@@ -1,77 +1,59 @@
-/*
-Constructor: TintColor(srcImage, tintColor, blendMode)
-+ srcImage: (string) url of image.
-    Example: 
-+ tintColor: (string) new color as Hex or RGB
-    Example: '#ff00ff' or 'rgb(255, 0, 255)'
-+ blendMode: (string) blending mode. 
-    Example: 'destination-atop'
-    
-Including: 
-    source-over, source-in, source-out, source-atop, 
-    destination-over, destination-in, destination-out, destination-atop,
-    lighter, copy, xor, multiply, screen, overlay, darken, lighten, 
-    color-dodge, color-burn, hard-light, soft-light, difference, exclusion,
-    hue, saturation, color, luminosity
-	
-Ref: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
-*/
-
-(function(document, window){ 
-  var TintColor = function(srcImage, tintColor, blendMode) {
-    this.srcImage = srcImage;
-    this.tintColor = tintColor;
-    this.blendMode = blendMode;
+class TintColor {
+  constructor(_srcImage, _tintColor) {
+    this._srcImage = _srcImage;
+    this._tintColorArray = this._getRGBAArray(_tintColor);
   }
-  TintColor.prototype.setSourceImage = function(srcImage) {
-    this.srcImage = srcImage;
+  setSourceImage(_srcImage) {
+    this._srcImage = _srcImage;
+    return this;
   }
-  TintColor.prototype.setTintColor = function(tintColor) {
-    this.tintColor = tintColor;
+  setTintColorArray(_tintColor) {
+    this._tintColorArray = this._getRGBAArray(_tintColor);
+    return this;
   }
-  TintColor.prototype.setBlendMode = function(blendMode) {
-    this.blendMode = blendMode;
-  }
-  TintColor.prototype.run = function() {
-    var self = this;
-    return new Promise(function(resolve, reject){
-      var canvas = document.createElement('canvas');
-      var context = canvas.getContext('2d');
-      var image = new Image();
-	  image.crossOrigin = "Anonymous";
-      image.onload = function() {
+  run() {
+    return new Promise((resolve, reject) => {
+      let canvas = document.createElement('canvas');
+      let context = canvas.getContext('2d');
+      let image = new Image();
+	    image.crossOrigin = "Anonymous";
+      image.onload = () => {
         canvas.width  = image.width;
         canvas.height = image.height;
-    
-        context.fillStyle = self.tintColor;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-    
-        context.globalCompositeOperation = self.blendMode;
-    
-        context.drawImage(image, 0, 0, image.width, image.height);
-    
-        var dataUrl = canvas.toDataURL();
-        resolve({url: dataUrl, width: image.width, height: image.height});
+
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        let imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+        let data = imgData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          // Change color of pixel which is different from transparent
+          if (data[i + 0] || data[i + 1] || data[i + 2] || data[i + 3]) {
+            data[i + 0] = this._tintColorArray[0];
+            data[i + 1] = this._tintColorArray[1];
+            data[i + 2] = this._tintColorArray[2];
+            data[i + 3] = this._tintColorArray[3];
+          }
+        }
+        context.putImageData(imgData, 0, 0);
+        resolve({url: canvas.toDataURL(), width: image.width, height: image.height});
       };
-      image.onerror = function(error) {
-        reject(error);
-      }
-      image.src = self.srcImage;
+      image.onerror = error => reject(this._srcImage, error);
+      image.src = this._srcImage;
     });  
   }
-  TintColor.prototype.getSize = function getSize() {
-    var self = this;
-    return new Promise(function(resolve, reject) {
-      var image = new Image();
-	  image.crossOrigin = "Anonymous";
-      image.onload = function() {
-        resolve({url: self.srcImage, width: image.width, height: image.height});
-      };
-      image.onerror = function(error) {
-        reject(error);
-      }
-      image.src = self.srcImage; 
-    }); 
+  _getRGBAArray(color) {
+    // Check input as rgba/rgb color
+    let m = /^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)$/.exec(color);
+    if(m) {
+      if(m[4]) return [m[1], m[2], m[3], m[4] * 255];
+      return [m[1], m[2], m[3], 255];
+    }
+
+    // Check input as hex 6-digit color
+    m = /^#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/.exec(color);
+    if(m) {
+      return [parseInt(m[1], 16), parseInt(m[2], 16) , parseInt(m[3], 16), 255];
+    }
   }
-  window.TintColor = TintColor;
-})(document, window);
+}
