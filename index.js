@@ -1,44 +1,25 @@
 const srcImg = "star-yellow.png";
-const newColor = "#ff00ff";
-const blendMode = "destination-atop";
 
-var tintWorker;
+document.addEventListener("DOMContentLoaded", event => {
+  let $ = document.querySelector.bind(document); 
+  setImage($("#originImg"), srcImg, 150, 150);
+  
+  new TintColor(srcImg, "#ff0000").run()
+  .then(result => setImage($("#newImg1"), result.url, 150, 150))
+  .catch(err => console.log(err));
 
-window.onload = function() {
-  tintWorker = new TintColor(srcImg, newColor, blendMode);
-};
+  new TintColor(srcImg, "rgba(255, 0, 255, 0.8)").run()
+  .then(result => setImage($("#newImg2"), result.url, 150, 150))
+  .catch(err => console.log(err));
 
-/*
-* Show original image 
-*/
-function view() {
-  var originImgDiv = document.getElementById("originImg");
-  tintWorker
-    .getSize()
-    .then(
-      result => setImage(originImgDiv, result.url, result.width, result.height),
-      error => console.log("Get size of image error: ", error)
-    );
-}
-
-/*
-* Show normal image after changing image's color
-*/
-function test() {
-  var tintImgDiv = document.getElementById("newImg");
-  tintWorker
-    .run()
-    .then(result =>
-      setImage(tintImgDiv, result.url, result.width, result.height)
-    )
-    .catch(error => {
-      console.log("Failed to change color of image", error);
-    });
-}
+  new TintColor(srcImg, "rgb(127, 127, 255)").run()
+  .then(result => setImage($("#newImg3"), result.url, 150, 150))
+  .catch(err => console.log(err));
+});
 
 function setImage(divElement, srcURL, width, height) {
   divElement.style.width = width + "px";
   divElement.style.height = height + "px";
-  divElement.style.backgroundSize = "" + width + "px " + height + "px";
   divElement.style.backgroundImage = "url('" + srcURL + "')";
+  divElement.style.backgroundSize = "" + width + "px " + height + "px";
 }
