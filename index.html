@@ -7,12 +7,21 @@
   <title>Simple Tint Color Test using JavaScript</title>
   
   <!--  Styles  -->
+  <style>
+    .item {
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
-  <button onclick="view()">View</button>
-  <div id="originImg"></div>
-  <button onclick="test()">Test</button>
-  <div id="newImg"></div>
+  <div>
+    <div class="item" id="originImg"></div>
+  </div>
+  <div>
+    <div class="item" id="newImg1"></div>
+    <div class="item" id="newImg2"></div>
+    <div class="item" id="newImg3"></div>
+  </div>
   
   <!-- Scripts -->
   <script src="TintColor.js"></script>
