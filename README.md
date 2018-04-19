@@ -2,70 +2,42 @@
 Create Tint Color for Images Using JavaScript.
 
 ## Usage
-  * Constructor: TintColor(srcImage, tintColor, blendMode)
+  * Constructor: TintColor(srcImage, tintColor)
     + srcImage: (string) url of image. 
-    + tintColor: (string) new color as Hex or RGB. Example: '#ff00ff' or 'rgb(255, 0, 255)'
-    + blendMode: (string) blending mode. Example: 'destination-atop'
+    + tintColor: (string) new color as Hex or RGB or RGBA. Example: '#ff00ff' or 'rgb(255, 0, 255)' or 'rgb(255, 0, 255, 0.5)'
     
-    Including: 
-        source-over, source-in, source-out, source-atop, 
-        destination-over, destination-in, destination-out, destination-atop,
-        lighter, copy, xor, multiply, screen, overlay, darken, lighten, 
-        color-dodge, color-burn, hard-light, soft-light, difference, exclusion,
-        hue, saturation, color, luminosity
   * API:
     + setSourceImage(srcImage)
     + setTintColor(tintColor)
-    + setBlendMode(blendMode)
     + run()
-    + getSize()
 
 ## Example
 
 ```js
-const srcImg = "https://res.cloudinary.com/drcrre4xg/image/upload/c_scale,w_200/v1515227140/star-yellow_hjfybq.png";
-const newColor = "#ff00ff";
-const blendMode = "destination-atop";
+const srcImg = "star-yellow.png";
 
-var tintWorker;
+document.addEventListener("DOMContentLoaded", event => {
+  let $ = document.querySelector.bind(document); 
+  setImage($("#originImg"), srcImg, 150, 150);
+  
+  new TintColor(srcImg, "#ff0000").run()
+  .then(result => setImage($("#newImg1"), result.url, 150, 150))
+  .catch(err => console.log(err));
 
-window.onload = function() {
-  tintWorker = new TintColor(srcImg, newColor, blendMode);
-};
+  new TintColor(srcImg, "rgba(255, 0, 255, 0.8)").run()
+  .then(result => setImage($("#newImg2"), result.url, 150, 150))
+  .catch(err => console.log(err));
 
-/*
-* Show original image 
-*/
-function view() {
-  var originImgDiv = document.getElementById("originImg");
-  tintWorker
-    .getSize()
-    .then(
-      result => setImage(originImgDiv, result.url, result.width, result.height),
-      error => console.log("Get size of image error: ", error)
-    );
-}
-
-/*
-* Show normal image after changing image's color
-*/
-function test() {
-  var tintImgDiv = document.getElementById("newImg");
-  tintWorker
-    .run()
-    .then(result =>
-      setImage(tintImgDiv, result.url, result.width, result.height)
-    )
-    .catch(error => {
-      console.log("Failed to change color of image", error);
-    });
-}
+  new TintColor(srcImg, "rgb(127, 127, 255)").run()
+  .then(result => setImage($("#newImg3"), result.url, 150, 150))
+  .catch(err => console.log(err));
+});
 
 function setImage(divElement, srcURL, width, height) {
   divElement.style.width = width + "px";
   divElement.style.height = height + "px";
-  divElement.style.backgroundSize = "" + width + "px " + height + "px";
   divElement.style.backgroundImage = "url('" + srcURL + "')";
+  divElement.style.backgroundSize = "" + width + "px " + height + "px";
 }
 ```
 ## References
